@@ -1,16 +1,20 @@
-name: Pysa
-categories:
-  - linter
-tags:
-  - python
-license: MIT License
-types:
-  - cli
-source: "https://github.com/facebook/pyre-check"
-homepage: "https://pyre-check.org/docs/pysa-basics.html"
-description: >-
-  A tool based on Facebook's pyre-check to identify potential security issues in
-  Python code identified with taint analysis.
-resources:
-  - title: "Workshop: Graham Bleaney - Pysa to Identify Python Vulnerabilities - DEF CON 28SM AppSec Village"
-    url: https://www.youtube.com/watch?v=8I3zlvtpOwws
+name: Static Analysis
+
+on: pull_request
+
+jobs:
+  build:
+    runs-on: [ubuntu-latest, macos-latest]
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python 3.x
+        uses: actions/setup-python@v1
+        with:
+          python-version: "3.8"
+      - name: Pyre-Check Action Step
+        uses: ./
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          pip: "numpy pandas"
+          args: "--source-directory ."
