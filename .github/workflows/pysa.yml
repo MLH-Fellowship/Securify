@@ -36,14 +36,14 @@ jobs:
         run: |
           mkdir typeshed
           unzip -qq ./stubs/typeshed/typeshed.zip -d ./typeshed/
-          ./scripts/setup.sh --local --no-tests
+      # ./scripts/setup.sh --local --no-tests
           make -C source
           echo "PYTHONPATH=$GITHUB_WORKSPACE/..:$PYTHONPATH" >> $GITHUB_ENV
           echo "pythonLocation=$GITHUB_WORKSPACE:$pythonLocation" >> $GITHUB_ENV
           echo "PYRE_BINARY=$GITHUB_WORKSPACE/source/_build/default/main.exe" >> $GITHUB_ENV
           echo "PYRE_TYPESHED=$GITHUB_WORKSPACE/typeshed/typeshed-master/" >> $GITHUB_ENV
-      - name: Run and test pysa output
-        run: |
-          cd ./documentation/deliberately_vulnerable_flask_app
-          . ./setup.sh
-          ./run_integration_tests.sh
+      # - name: Run and test pysa output
+      #   run: |
+      #     cd ./documentation/deliberately_vulnerable_flask_app
+      #     . ./setup.sh
+      #     ./run_integration_tests.sh
